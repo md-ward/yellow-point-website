@@ -13,8 +13,9 @@ const PartnersSection: NextPage<SectionProps> = ({ sectionRefs }) => {
   ];
   return (
     <section
+    id="partners"
       ref={sectionRefs}
-      className="sm:h-screen panel bg-[#0f0f0f] text-white px-6 flex flex-col justify-center items-center"
+      className="!h-screen panel bg-[#0f0f0f] text-white px-6 flex flex-col justify-center items-center"
     >
       <h2 className="text-5xl md:text-6xl font-bold text-yellow-400 mb-6 text-center">
         Our Success Partners

@@ -15,7 +15,7 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body
         suppressHydrationWarning={true}
-        className="min-h-screen bg-gradient-to-br from-[#2d2d2d] to-[#1c1c1c] text-white font-sans flex flex-col"
+        className=" bg-gradient-to-br from-[#2d2d2d] to-[#1c1c1c] text-white font-sans flex flex-col"
       >
         <NextIntlClientProvider locale={locale}>
           <Navbar />

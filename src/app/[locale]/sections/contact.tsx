@@ -11,7 +11,7 @@ const ContactSection: NextPage<SectionProps> = ({ sectionRefs }) => {
       }}
       className="h-screen panel bg-[#1a1a1a] text-white flex flex-col justify-center items-center px-6 text-center"
     >
-      <h2 className="text-4xl font-bold text-yellow-300 mb-6">
+      <h2 className="text-2xl md:text-4xl font-bold text-yellow-300 mb-6">
         Let’s Build Something Great
       </h2>
       <p className="text-gray-400 text-lg mb-6">

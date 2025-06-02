@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState, RefObject } from "react";
+import { useEffect, useRef, useState, RefObject } from "react";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import {
   FaBullhorn,
   FaSearch,
@@ -17,51 +19,50 @@ const servicesData = [
     title: "Social Media Management",
     description:
       "We plan, create and manage your social networks to maximize reach, engagement, and community impact.",
-    icon: <FaBullhorn className="text-yellow-400 text-4xl" />,
+    icon: <FaBullhorn className="text-yellow-400 text-5xl" />,
   },
   {
-    title: "Search Engine Optimization (SEO)",
+    title: "SEO Optimization",
     description:
-      "We apply best SEO practices including meta tags, backlinks, and performance optimization to help you rank at the top of Google.",
-    icon: <FaSearch className="text-yellow-400 text-4xl" />,
+      "We apply SEO best practices to help you rank at the top of Google.",
+    icon: <FaSearch className="text-yellow-400 text-5xl" />,
   },
   {
     title: "Branding & Identity",
     description:
-      "From strategy and positioning to rebranding, we build strong, cohesive identities that connect emotionally and strategically.",
-    icon: <FaPaintBrush className="text-yellow-400 text-4xl" />,
+      "We build strong, cohesive brand identities that resonate emotionally.",
+    icon: <FaPaintBrush className="text-yellow-400 text-5xl" />,
   },
   {
     title: "Content Strategy",
     description:
-      "We create custom, insight-driven content plans that resonate with your audience and elevate your brand narrative.",
-    icon: <FaFileAlt className="text-yellow-400 text-4xl" />,
+      "Insight-driven content plans that elevate your brand's narrative.",
+    icon: <FaFileAlt className="text-yellow-400 text-5xl" />,
   },
   {
-    title: "Paid Ads & PPC",
-    description:
-      "We build high-converting ad campaigns that drive traffic, leads, and conversions across Google, Meta, and more.",
-    icon: <FaMoneyBillWave className="text-yellow-400 text-4xl" />,
+    title: "Paid Ads",
+    description: "We build high-converting PPC campaigns across platforms.",
+    icon: <FaMoneyBillWave className="text-yellow-400 text-5xl" />,
   },
   {
-    title: "Videography & Photography",
-    description:
-      "We produce professional content — from reels to podcasts — tailored for your brand’s story and audience.",
-    icon: <FaCamera className="text-yellow-400 text-4xl" />,
+    title: "Photography",
+    description: "Reels, podcasts, and content to amplify your visual brand.",
+    icon: <FaCamera className="text-yellow-400 text-5xl" />,
   },
   {
     title: "Motion Graphics",
-    description:
-      "From animated explainers to intros and story-driven visuals — we bring your brand’s motion identity to life.",
-    icon: <FaFilm className="text-yellow-400 text-4xl" />,
+    description: "Animated visuals that tell your story and boost engagement.",
+    icon: <FaFilm className="text-yellow-400 text-5xl" />,
   },
   {
-    title: "Website Development",
+    title: "Web Development",
     description:
-      "We craft responsive, modern websites that deliver fast, intuitive, and elegant user experiences across all devices.",
-    icon: <FaCode className="text-yellow-400 text-4xl" />,
+      "Modern, responsive websites with fast, intuitive experiences.",
+    icon: <FaCode className="text-yellow-400 text-5xl" />,
   },
 ];
+
+const radius = 250;
 
 const ServicesSection = ({
   sectionRefs,
@@ -69,14 +70,48 @@ const ServicesSection = ({
   sectionRefs: RefObject<HTMLElement | null>;
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [displayedIndex, setDisplayedIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useGSAP(() => {
+    const total = servicesData.length;
+    const angleStep = (360 / total) * (Math.PI / 180);
+
+    cardsRef.current.forEach((card, i) => {
+      const angle = angleStep * ((i - activeIndex + total) % total);
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
+
+      if (card) {
+        const isActive = i === activeIndex;
+        gsap.to(card, {
+          x,
+          y,
+          opacity: isActive ? 1 : 0.5,
+          scale: isActive ? 1.2 : 0.85,
+          duration: 0.4,
+          ease: "power3.inOut",
+          zIndex: isActive ? 2 : 1,
+          boxShadow: isActive
+            ? "0 0 25px rgba(255, 255, 100, 0.9)"
+            : "0 0 8px rgba(0, 0, 0, 0.4)",
+          onComplete: () => {
+            if (isActive) setDisplayedIndex(i);
+          },
+        });
+      }
+    });
+  }, [activeIndex]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (!paused) {
         setActiveIndex((prev) => (prev + 1) % servicesData.length);
       }
-    }, 6000);
+    }, 3000);
     return () => clearInterval(interval);
   }, [paused]);
 
@@ -86,45 +121,74 @@ const ServicesSection = ({
       ref={(el) => {
         if (sectionRefs.current) sectionRefs.current = el;
       }}
-      className="h-screen panel bg-gradient-to-tr from-black via-gray-900 to-black text-white flex flex-col justify-center items-center px-6"
+      className="!min-h-screen panel h-full !pt-20  md:!pt-10 flex flex-col !justify-center items-center     bg-gradient-to-tr from-black via-gray-900 to-black text-white relative"
     >
-      <div className="text-center mb-10">
-        <h2 className="text-4xl font-bold text-yellow-400 mb-3">Our Expertise</h2>
-        <p className="text-gray-300 max-w-2xl mx-auto">
-          End-to-end digital marketing that delivers. Explore our core services that connect creativity, technology, and strategy.
-        </p>
-      </div>
+      <h2 className="text-4xl font-bold text-yellow-400 text-center">
+        Our Expertise
+      </h2>
 
-      <div className="flex flex-col gap-6 max-w-6xl w-full">
-        {/* Large Card */}
-        <div
-          className="bg-white text-black p-8 rounded-3xl shadow-2xl transition-all duration-500 hover:scale-[1.02]"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
-          {servicesData[activeIndex].icon}
-          <h3 className="text-2xl font-bold mt-4 mb-2">
-            {servicesData[activeIndex].title}
+      <div
+        ref={containerRef}
+        className="relative w-[700px] h-[700px] max-w-[95vw] max-h-[95vw] hidden md:flex items-center justify-center"
+      >
+        {servicesData.map((service, i) => (
+          <div
+            onMouseEnter={(el) => {
+              setPaused(true);
+              gsap.to(el.currentTarget, {
+                scale: 1.2,
+                duration: 0.2,
+                ease: "back.inOut",
+              });
+            }}
+            onMouseLeave={(el) => {
+              setPaused(false);
+              gsap.to(el.currentTarget, {
+                scale: 1,
+                duration: 0.2,
+                ease: "back.inOut",
+              });
+            }}
+            key={i}
+            ref={(el) => {
+              cardsRef.current[i] = el;
+            }}
+            className={`absolute size-20 rounded-full   bg-white text-black flex items-center justify-center text-2xl cursor-pointer transition-transform duration-300 ${
+              i === activeIndex ? "ring-4 ring-yellow-400 shadow-xl" : ""
+            }`}
+            onClick={() => setActiveIndex(i)}
+          >
+            {service.icon}
+          </div>
+        ))}
+
+        <div className="absolute w-96 h-48  sm:w-[28rem] text-center text-white px-8 py-8 border border-yellow-400 rounded-3xl bg-black/60 backdrop-blur-xl">
+          {/* {servicesData[displayedIndex].icon} */}
+          <h3 className="text-3xl font-bold mt-3 mb-2">
+            {servicesData[displayedIndex].title}
           </h3>
-          <p className="text-gray-700 text-base leading-relaxed">
-            {servicesData[activeIndex].description}
+          <p className="text-gray-300 text-base sm:text-lg">
+            {servicesData[displayedIndex].description}
           </p>
         </div>
+      </div>
 
-        {/* Thumbnails */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {servicesData.map((service, index) =>
-            index === activeIndex ? null : (
-              <button
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                className="bg-white/10 backdrop-blur-sm border border-white/20 p-4 rounded-2xl text-center text-white hover:bg-white/20 transition-all"
-              >
+      <div className="md:hidden w-full overflow-x-auto scroll-smooth flex flex-col justify-center snap-x snap-mandatory px-4 py-6">
+        <div className="flex gap-4 w-max">
+          {servicesData.map((service, i) => (
+            <div
+              key={i}
+              className="snap-center flex-shrink-0 bg-white/10 backdrop-blur border border-yellow-400 rounded-2xl !grow w-80 h-60 px-6 py-5 text-center shadow-md"
+            >
+              <div className="text-yellow-400 text-3xl mb-3 flex justify-center">
                 {service.icon}
-                <p className="mt-2 text-sm">{service.title}</p>
-              </button>
-            )
-          )}
+              </div>
+              <h3 className="text-lg font-semibold mb-1 text-yellow-200">
+                {service.title}
+              </h3>
+              <p className="text-sm text-gray-300">{service.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -5,7 +5,6 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useTranslations } from "next-intl";
 import { Circle, Menu, X } from "lucide-react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Navbar = () => {
   const navRef = useRef<HTMLElement | null>(null);
@@ -14,49 +13,6 @@ const Navbar = () => {
   const t = useTranslations("Home");
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-  gsap.registerPlugin(useGSAP);
-  useGSAP(() => {
-    const ctx = ScrollTrigger.create({
-      trigger: "#services",
-      start: "top center",
-      end: "bottom center",
-
-      onEnter: () => {
-        gsap.to(".nav-brand-text", { color: "#000", duration: 0.3 });
-        gsap.to(".nav-circle", { fill: "#000", color: "#000", duration: 0.3 });
-        gsap.to(".menu-icon", { color: "#000", duration: 0.3 });
-      },
-
-      onEnterBack: () => {
-        gsap.to(".nav-brand-text", { color: "#000", duration: 0.3 });
-        gsap.to(".nav-circle", { fill: "#000", color: "#000", duration: 0.3 });
-        gsap.to(".menu-icon", { color: "#000", duration: 0.3 });
-      },
-
-      onLeave: () => {
-        gsap.to(".nav-brand-text", { color: "#fff", duration: 0.3 });
-        gsap.to(".nav-circle", {
-          fill: "#facc15",
-          color: "#facc15",
-          duration: 0.3,
-        });
-        gsap.to(".menu-icon", { color: "#fff", duration: 0.3 });
-      },
-
-      // ✅ Fix: handle scrolling back UP and leaving the section
-      onLeaveBack: () => {
-        gsap.to(".nav-brand-text", { color: "#fff", duration: 0.3 });
-        gsap.to(".nav-circle", {
-          fill: "#facc15",
-          color: "#facc15",
-          duration: 0.3,
-        });
-        gsap.to(".menu-icon", { color: "#fff", duration: 0.3 });
-      },
-    });
-
-    return () => ctx.kill();
-  }, []);
 
   // Animate navbar entrance
   useGSAP(() => {
@@ -123,6 +79,8 @@ const Navbar = () => {
     if (href.startsWith("#")) {
       const el = document.querySelector(href);
       if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else if (href === "/") {
+      document.body.scrollIntoView({ behavior: "smooth" });
     } else {
       router.push(href);
     }
@@ -151,7 +109,7 @@ const Navbar = () => {
       {/* NAVBAR */}
       <nav
         ref={navRef}
-        className="flex items-center justify-between px-6 py-4  top-0 w-full z-[100]   h-20  "
+        className="flex fixed items-center justify-between px-6 py-4  top-0 w-full z-[100]   h-20  "
       >
         <div className="text-2xl capitalize font-bold flex items-center transition-colors duration-300">
           <p className="text-yellow-400">yellow</p>
@@ -211,17 +169,20 @@ const Navbar = () => {
         >
           {t("nav.about")}
         </button>
-        <div className="relative group">
+        <div className="relative  w-full flex items-center justify-center">
           <button
             onClick={() => handleNavClick("#services")}
-            className="menu-link text-4xl font-semibold hover:text-yellow-600 transition"
+            className="menu-link  text-4xl font-semibold w-fit hover:text-yellow-600 transition"
           >
             {t("nav.services")}
           </button>
-          <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 bg-black text-yellow-300 text-sm px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition-all">
-            {"Explore our capabilities"}
-          </div>
         </div>
+        <button
+          onClick={() => handleNavClick("#partners")}
+          className="menu-link  text-4xl font-semibold w-fit hover:text-yellow-600 transition"
+        >
+          {t("nav.partners")}
+        </button>
         <button
           onClick={() => handleNavClick("#contact")}
           className="menu-link text-2xl mt-6 bg-black text-yellow-300 px-6 py-2 rounded-full hover:scale-105 transition"

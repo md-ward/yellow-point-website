@@ -1,6 +1,7 @@
+"use client";
 import { SectionProps } from "@/types/sections.type";
 import React from "react";
-
+import gsap from "gsap";
 const HeroSection: React.FC<SectionProps> = ({ sectionRefs }) => {
   return (
     <section
@@ -38,7 +39,23 @@ const HeroSection: React.FC<SectionProps> = ({ sectionRefs }) => {
             agency based in Al-Ain — connecting brands and people through
             powerful storytelling and innovative strategies.
           </p>
-          <button className=" bg-yellow-400 text-black px-8 py-4 rounded-full font-semibold shadow-md hover:scale-105 mt-4">
+          <button
+            onMouseEnter={(e) => {
+              gsap.to(e.currentTarget, {
+                scale: 1.1,
+                duration: 0.3,
+                ease: "back.inOut",
+              });
+            }}
+            onMouseLeave={(e) => {
+              gsap.to(e.currentTarget, {
+                scale: 1,
+                duration: 0.3,
+                ease: "back.inOut",
+              });
+            }}
+            className=" bg-yellow-400 cursor-pointer  !ring-1 ring-white text-black px-8 py-4 rounded-full font-semibold shadow-md   mt-4"
+          >
             Let’s Elevate Your Brand
           </button>
         </div>

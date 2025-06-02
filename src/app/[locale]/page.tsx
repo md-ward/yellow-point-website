@@ -63,6 +63,23 @@ export default function Home() {
         stagger: 0.2,
       });
     }
+    if (heroContentContainer && heroContentContainer.children[2]) {
+      tl.to(heroContentContainer.children[2], {
+        scale: 1.2,
+        duration: 0.3,
+        color: "white",
+        ease: "back.inOut",
+
+        onComplete: () => {
+          gsap.to(heroContentContainer.children[2], {
+            scale: 1,
+            duration: 0.4,
+            color: "black",
+            ease: "back.inOut",
+          });
+        },
+      });
+    }
   }, []);
 
   useGSAP(() => {
@@ -155,8 +172,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="overflow-hidden relative font-sans">
-      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50">
+    <div className="overflow-hidden relative font-sans !w-screen">
+      <div className="hidden md:fixed right-6 top-1/2 transform -translate-y-1/2 z-50">
         <div className="h-96 w-2 bg-gray-300 rounded-full relative overflow-hidden">
           <div
             ref={progressBarRef}
