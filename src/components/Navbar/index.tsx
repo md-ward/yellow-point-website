@@ -151,7 +151,7 @@ const Navbar = () => {
       {/* NAVBAR */}
       <nav
         ref={navRef}
-        className="flex items-center justify-between px-6 py-4  top-0 w-full z-[100]  fixed h-20  "
+        className="flex items-center justify-between px-6 py-4  top-0 w-full z-[100]   h-20  "
       >
         <div className="text-2xl capitalize font-bold flex items-center transition-colors duration-300">
           <p className="text-yellow-400">yellow</p>
