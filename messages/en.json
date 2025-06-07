@@ -3,6 +3,35 @@
     "title": "Opps something went wrong",
     "message": "Page not found"
   },
+
+  "hero": {
+    "logoTitle": "Yellow Point Media",
+    "titleLine1": "Built on Experience,",
+    "titleLine2": "Driven by Creativity",
+    "subtitle": "Yellow Point Media is a trusted, award-winning digital marketing agency based in Al-Ain — connecting brands and people through powerful storytelling and innovative strategies.",
+    "cta": "Let’s Elevate Your Brand"
+  },
+  "contact": {
+    "title": "Let’s Build Something Great",
+    "description": "Whether you're launching a new brand or scaling an existing one, we're here to help you break through. Let's start a conversation.",
+    "namePlaceholder": "Your Name",
+    "emailPlaceholder": "Your Email",
+    "messagePlaceholder": "Your Message",
+    "button": "Send Message",
+    "successAlert": "Message sent successfully!"
+  },
+
+  "missionAndVision": {
+    "missionTitle": "Our Mission",
+    "missionText": "To make your brand seen. We specialize in creating bold, high-visibility campaigns across digital and out-of-home media, delivering results that speak volumes.",
+    "visionTitle": "Our Vision",
+    "visionText": "To be the region’s most trusted media partner — empowering audiences, clients, and communities through inspiring storytelling, strategic innovation, and meaningful connections."
+  },
+  "Partners": {
+    "title": "Our Success Partners",
+    "description": "From government entities to innovative startups, our partners trust us to build lasting connections through strategic media and design."
+  },
+
   "Home": {
     "nav": {
       "home": "Home",
@@ -10,43 +39,53 @@
       "services": "Services",
       "contact": "Contact",
       "partners": "Partners"
-    },
-    "hero": {
-      "title1": "Driving Impactful",
-      "title2": "Advertising",
-      "subtitle": "We create innovative media strategies that elevate your brand and engage your audience.",
-      "button": "Get Started"
-    },
-    "about": {
-      "title": "Who We Are",
-      "description": "Yellow Point Media is a trusted media and advertising company in Al-Ain, providing digital marketing, branding, and content production with creativity and strategy since 2018."
-    },
-    "services": {
-      "title": "Our Services",
-      "subtitle": "Creative media solutions tailored for impact",
-      "list": [
-        {
-          "title": "Digital Marketing",
-          "description": "Engaging strategies for customer acquisition and growth."
-        },
-        {
-          "title": "Content Creation",
-          "description": "Professional video, motion, and photography to elevate your brand."
-        },
-        {
-          "title": "Brand Strategy",
-          "description": "Comprehensive branding, identity, and messaging services."
-        }
-      ]
-    },
-    "contact": {
-      "title": "Let's Work Together",
-      "subtitle": "Send us a message and we'll get back to you shortly.",
-      "name": "Your Name",
-      "email": "Your Email",
-      "message": "Your Message",
-      "button": "Send Message",
-      "success": "Message Sent!"
     }
+  },
+  "about": {
+    "title": "Built on Culture, Rooted in Results",
+    "description": "Since 2018, Yellow Point Media has grown from a local agency into a leading force in digital marketing across the UAE and GCC. With deep cultural insight, technological expertise, and a results-first mindset, we help brands capture attention and deliver measurable impact."
+  },
+
+  "Services": {
+    "title": "Our Expertise",
+    "list": [
+      {
+        "title": "Social Media Management",
+        "description": "We plan, create and manage your social networks to maximize reach, engagement, and community impact."
+      },
+      {
+        "title": "SEO Optimization",
+        "description": "We apply SEO best practices to help you rank at the top of Google."
+      },
+      {
+        "title": "Branding & Identity",
+        "description": "We build strong, cohesive brand identities that resonate emotionally."
+      },
+      {
+        "title": "Content Strategy",
+        "description": "Insight-driven content plans that elevate your brand's narrative."
+      },
+      {
+        "title": "Paid Ads",
+        "description": "We build high-converting PPC campaigns across platforms."
+      },
+      {
+        "title": "Photography",
+        "description": "Reels, podcasts, and content to amplify your visual brand."
+      },
+      {
+        "title": "Motion Graphics",
+        "description": "Animated visuals that tell your story and boost engagement."
+      },
+      {
+        "title": "Web Development",
+        "description": "Modern, responsive websites with fast, intuitive experiences."
+      }
+    ]
+  },
+  "Alert": {
+    "title": "Warning!",
+    "message": "This is a beta version of the website and doesn't represent the final product because the owner hasn't provided further details or cooperation.",
+    "dismiss": "Dismiss"
   }
 }

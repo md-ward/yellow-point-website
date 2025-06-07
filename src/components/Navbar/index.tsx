@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useTranslations } from "next-intl";
 import { Circle, Menu, X } from "lucide-react";
+import LanguageButton from "../LanguageButton";
 
 const Navbar = () => {
   const navRef = useRef<HTMLElement | null>(null);
@@ -124,19 +125,22 @@ const Navbar = () => {
           />
         </div>
 
-        <button
-          onClick={menuOpen ? closeMenu : openMenu}
-          className="hover:scale-110 transition cursor-pointer z-[201]"
-        >
-          {menuOpen ? (
-            <X size={28} />
-          ) : (
-            <Menu
-              className="menu-icon text-white transition-colors duration-300"
-              size={28}
-            />
-          )}
-        </button>
+        <div className="flex w-fit  gap-4">
+          <LanguageButton style="inlineSlid" />
+          <button
+            onClick={menuOpen ? closeMenu : openMenu}
+            className="hover:scale-110 transition cursor-pointer z-[201]"
+          >
+            {menuOpen ? (
+              <X size={28} />
+            ) : (
+              <Menu
+                className="menu-icon text-white transition-colors duration-300"
+                size={28}
+              />
+            )}
+          </button>
+        </div>
       </nav>
 
       {/* BACKGROUND OVERLAY */}
